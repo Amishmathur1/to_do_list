@@ -1,6 +1,6 @@
 ## Workflow of this Project
 
-Idea :-
+- Idea
     - To make a TO-DO List with auth support so every individual user will have its own to-do list
     - in V1 support basic login page with password hashing, after that think about google login via oauth
     - A normal simple UI and a basic TO-DO list with the options such as:-
@@ -10,7 +10,7 @@ Idea :-
         - Deadline (V2)
         - Reminder via registered mail (V2)
 
-BackEnd Components:-
+- BackEnd Components
     - User registration
     - Password hashing
     - Login
@@ -56,4 +56,3 @@ FrontEnd Components:-
     Database
         ↓
     Response
-    
