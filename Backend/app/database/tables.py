@@ -1,6 +1,7 @@
 import os
-import psycopg
-from dotenv import load_dotenv
+
+import psycopg  # pyright: ignore[reportMissingImports]
+from dotenv import load_dotenv  # pyright: ignore[reportMissingImports]
 
 load_dotenv() #Always load the .env file before using its features
 
@@ -24,6 +25,41 @@ def user_detail_store(email, password):
             curr.execute(sql, (email, password))
             conn.commit()
 
-    except (Exception, psycopg.DatabaseError) as error:
+    except Exception:
         conn.rollback()
-        return error
+        raise
+
+def login_pass_retrival(email):
+    sql = '''
+        SELECT id, password FROM users
+        WHERE email = (%s);
+    '''
+    try:
+        with conn.cursor() as curr:
+            curr.execute(sql, (email,))
+            data = curr.fetchone()
+            if data:
+                return data
+
+    except Exception:
+        conn.rollback()
+        raise
+# 
+# def get_id(email):
+#     sql = '''
+#         SELECT id FROM users
+#         WHERE email = (%s);
+#     '''
+#     try:
+#         with conn.cursor() as curr:
+#             curr.execute(sql, (email,))
+#             data = curr.fetchone()
+#             if data:
+#                 return data
+# 
+#             conn.commit()
+#             
+#     except (Exception, psycopg.DatabaseError) as error:
+#         conn.rollback()
+#         return error
+        
